@@ -5,6 +5,8 @@ CREATE TABLE IF NOT EXISTS menfess (
     color VARCHAR(20) DEFAULT 'bg-white',
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     -- TODO : Tambahkan kolom likes & dislikes di bawah ini --
+    likes INT DEFAULT 0,
+    dislikes INT DEFAULT 0
     -- Clue: Gunakan tipe data INT dan DEFAULT 0 --
 );
 
