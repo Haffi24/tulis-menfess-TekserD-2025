@@ -37,18 +37,35 @@ router.post("/send", async (req, res) => {
   }
 });
 
-// Route untuk Like
+/** * TUGAS 1.2: BACKEND LOGIC 
+ */
+
+// Route untuk Like (POST /like/:id) [cite: 197]
 router.post('/like/:id', async (req, res) => {
-    const { id } = req.params;
-    await db.query('UPDATE menfess SET likes = likes + 1 WHERE id = ?', [id]);
-    res.redirect('/'); // Kembali ke halaman utama
+    try {
+        const { id } = req.params;
+        // Cari pesan berdasarkan ID, lalu tambahkan nilai kolom likes sebanyak +1 [cite: 197]
+        await db.query('UPDATE menfess SET likes = likes + 1 WHERE id = ?', [id]);
+        // Redirect: Kembali ke halaman utama (/) [cite: 200]
+        res.redirect('/'); 
+    } catch (err) {
+        console.error(err);
+        res.redirect('/');
+    }
 });
 
-// Route untuk Dislike
+// Route untuk Dislike (POST /dislike/:id) [cite: 198]
 router.post('/dislike/:id', async (req, res) => {
-    const { id } = req.params;
-    await db.query('UPDATE menfess SET dislikes = dislikes + 1 WHERE id = ?', [id]);
-    res.redirect('/'); // Kembali ke halaman utama
+    try {
+        const { id } = req.params;
+        // Cari pesan berdasarkan ID, lalu tambahkan nilai kolom dislikes sebanyak +1 [cite: 198]
+        await db.query('UPDATE menfess SET dislikes = dislikes + 1 WHERE id = ?', [id]);
+        // Redirect: Kembali ke halaman utama (/) [cite: 200]
+        res.redirect('/'); 
+    } catch (err) {
+        console.error(err);
+        res.redirect('/');
+    }
 });
 
 module.exports = router;
