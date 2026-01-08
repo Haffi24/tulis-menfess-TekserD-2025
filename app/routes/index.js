@@ -37,30 +37,18 @@ router.post("/send", async (req, res) => {
   }
 });
 
-// Tugas 1.2.a: Route LIKE
+// Route untuk Like
 router.post('/like/:id', async (req, res) => {
-  const { id } = req.params; // Mencari pesan berdasarkan ID [cite: 197]
-  try {
-    // Menambahkan nilai kolom likes sebanyak +1 [cite: 197]
-    await db.query("UPDATE menfess SET likes = likes + 1 WHERE id = ?", [id]);
-    res.redirect("/"); // Redirect kembali ke halaman utama (/) 
-  } catch (err) {
-    console.error(err);
-    res.redirect("/");
-  }
+    const { id } = req.params;
+    await db.query('UPDATE menfess SET likes = likes + 1 WHERE id = ?', [id]);
+    res.redirect('/'); // Kembali ke halaman utama
 });
 
-// Tugas 1.2.b: Route DISLIKE 
+// Route untuk Dislike
 router.post('/dislike/:id', async (req, res) => {
-  const { id } = req.params; // Mencari pesan berdasarkan ID [cite: 198]
-  try {
-    // Menambahkan nilai kolom dislikes sebanyak +1 [cite: 198]
-    await db.query("UPDATE menfess SET dislikes = dislikes + 1 WHERE id = ?", [id]);
-    res.redirect("/"); // Redirect kembali ke halaman utama (/) 
-  } catch (err) {
-    console.error(err);
-    res.redirect("/");
-  }
+    const { id } = req.params;
+    await db.query('UPDATE menfess SET dislikes = dislikes + 1 WHERE id = ?', [id]);
+    res.redirect('/'); // Kembali ke halaman utama
 });
 
 module.exports = router;
